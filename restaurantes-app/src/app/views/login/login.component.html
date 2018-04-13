@@ -1,0 +1,25 @@
+<div style="text-align:center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%)">
+    <form ng-submit="login()" autocomplete="off">
+        <div style="border: 0px; background: #002200a0; padding: 10px; border-radius: 15px">
+            <h3 style="margin: 5px 10px 15px 10px; color: seashell">
+                Bem vindo ao {{titulo}}
+            </h3>
+            <div style="border: 0px; background: #cceeff90; padding: 10px; border-radius: 15px">
+                <h5 style="margin: 5px 0px 15px 0px">
+                    ACESSO
+                </h5>
+                <div style="margin: 8px">
+                    <input type="text" id="input-username" size="40" maxlength="100" class="form-control input-padding" ng-model="vmLogin.username" placeholder="Login"
+                        autofocus autocomplete="off">
+                </div>
+                <div style="margin: 8px">
+                    <input type="password" id="input-password" size="40" maxlength="100" class="form-control input-padding" ng-model="vmLogin.password"
+                        autocomplete="off">
+                </div>
+                <div style="margin-top: 15px">
+                    <button type="submit">Acessar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
