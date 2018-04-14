@@ -14,7 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @SpringBootApplication
 @EnableMongoRepositories(basePackages = "tst.campos.repository")
 public class Application {
-
+ 
 	/**
 	 * Inicia a aplicação
 	 *
