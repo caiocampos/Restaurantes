@@ -1,9 +1,7 @@
 package tst.campos.util.annotation;
 
-import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
 import tst.campos.util.Searcher;
 
 /**
@@ -12,7 +10,6 @@ import tst.campos.util.Searcher;
  * @author Caio
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
 public @interface SpecialSearch {
 
 	Class<? extends Searcher> searcher();

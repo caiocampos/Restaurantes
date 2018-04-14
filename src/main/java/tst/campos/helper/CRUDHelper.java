@@ -22,9 +22,8 @@ import tst.campos.util.BusinessRuleAdapter;
 import tst.campos.util.CRUDType;
 import tst.campos.util.MongoDocument;
 import tst.campos.util.Searcher;
-import tst.campos.util.annotation.BusinessRule;
+import tst.campos.util.annotation.DocumentInfo;
 import tst.campos.util.annotation.SpecialSearch;
-import tst.campos.util.annotation.UserAcessType;
 
 /**
  * Helper de controle de Dados, define métodos de salvar, atualizar, apagar e
@@ -93,9 +92,7 @@ public class CRUDHelper {
 		Class<?> clazz = getModelClass(req.entity);
 		if (clazz != null && canCRUD(CRUDType.READ, clazz)) {
 			MongoRepository repo = getRepositoryFor(clazz);
-			if (repo == null) {
-				throw new BadRequestException("Não foi possível carregar o Repositório.");
-			}
+			BadRequestException.assertNotNull(repo, "Não foi possível carregar o Repositório.");
 			try {
 				return repo.findById(req.id).get();
 			} catch (Exception ex) {
@@ -117,9 +114,7 @@ public class CRUDHelper {
 		Class<?> clazz = getModelClass(req.entity);
 		if (clazz != null && canCRUD(CRUDType.READ, clazz)) {
 			MongoRepository repo = getRepositoryFor(clazz);
-			if (repo == null) {
-				throw new BadRequestException("Não foi possível carregar o Repositório.");
-			}
+			BadRequestException.assertNotNull(repo, "Não foi possível carregar o Repositório.");
 			try {
 				return repo.findAll();
 			} catch (Exception ex) {
@@ -141,10 +136,12 @@ public class CRUDHelper {
 		Class<?> clazz = getModelClass(req.entity);
 		if (clazz != null && canCRUD(CRUDType.READ, clazz)) {
 			MongoRepository repo = getRepositoryFor(clazz);
-			if (repo == null) {
-				throw new BadRequestException("Não foi possível carregar o Repositório.");
+			BadRequestException.assertNotNull(repo, "Não foi possível carregar o Repositório.");
+			DocumentInfo info = clazz.getAnnotation(DocumentInfo.class);
+			if (info == null || info.specialSearch() == null || info.specialSearch().length == 0) {
+				return Collections.EMPTY_LIST;
 			}
-			SpecialSearch special = clazz.getAnnotation(SpecialSearch.class);
+			SpecialSearch special = info.specialSearch()[0];
 			if (special == null || special.searcher() == null) {
 				return Collections.EMPTY_LIST;
 			}
@@ -185,13 +182,11 @@ public class CRUDHelper {
 		CRUDType type = data.getId() == null ? CRUDType.CREATE : CRUDType.UPDATE;
 		if (canCRUD(type, clazz)) {
 			MongoRepository repo = getRepositoryFor(clazz);
-			if (repo == null) {
-				throw new BadRequestException("Não foi possível carregar o Repositório.");
-			}
+			BadRequestException.assertNotNull(repo, "Não foi possível carregar o Repositório.");
 			try {
-				BusinessRule businessRule = clazz.getAnnotation(BusinessRule.class);
-				if (businessRule != null) {
-					Class<? extends BusinessRuleAdapter> ruleClass = businessRule.value();
+				DocumentInfo info = clazz.getAnnotation(DocumentInfo.class);
+				if (info != null && info.rule().length > 0) {
+					Class<? extends BusinessRuleAdapter> ruleClass = info.rule()[0].value();
 					BusinessRuleAdapter rule = this.beanFactory.getBean(ruleClass);
 					data = rule.onSave(data);
 				}
@@ -220,14 +215,12 @@ public class CRUDHelper {
 		Class<?> clazz = getModelClass(req.entity);
 		if (clazz != null && canCRUD(CRUDType.DELETE, clazz)) {
 			MongoRepository repo = getRepositoryFor(clazz);
-			if (repo == null) {
-				throw new BadRequestException("Não foi possível carregar o Repositório.");
-			}
+			BadRequestException.assertNotNull(repo, "Não foi possível carregar o Repositório.");
 			try {
 				MongoDocument data = (MongoDocument) repo.findById(req.id).get();
-				BusinessRule businessRule = clazz.getAnnotation(BusinessRule.class);
-				if (businessRule != null) {
-					Class<? extends BusinessRuleAdapter> ruleClass = businessRule.value();
+				DocumentInfo info = clazz.getAnnotation(DocumentInfo.class);
+				if (info != null && info.rule().length > 0) {
+					Class<? extends BusinessRuleAdapter> ruleClass = info.rule()[0].value();
 					BusinessRuleAdapter rule = this.beanFactory.getBean(ruleClass);
 					rule.onDelete(data);
 				}
@@ -261,30 +254,34 @@ public class CRUDHelper {
 				return false;
 			} else if (authorities.contains(Authority.ADMIN)) {
 				return true;
-			} else if (authorities.contains(Authority.USER)) {
+			} else {
 				if (clazz == null) {
 					return false;
 				}
-				UserAcessType acess = clazz.getAnnotation(UserAcessType.class);
-				if (acess == null) {
-					return true;
+				DocumentInfo info = clazz.getAnnotation(DocumentInfo.class);
+				if (info == null) {
+					return false;
 				}
-				switch (type) {
-					case CREATE:
-						return acess.create();
-					case READ:
-						return acess.read();
-					case UPDATE:
-						return acess.update();
-					case DELETE:
-						return acess.delete();
-					default:
-						return false;
+				if (authorities.contains(Authority.USER)) {
+					switch (type) {
+						case CREATE:
+							return info.userAcess().create();
+						case READ:
+							return info.userAcess().read();
+						case UPDATE:
+							return info.userAcess().update();
+						case DELETE:
+							return info.userAcess().delete();
+						default:
+							return false;
+					}
 				}
 			}
 		}
 		return false;
 	}
+
+	private final HashMap<String, Class<? extends MongoDocument>> modelClassMap = new HashMap();
 
 	/**
 	 * Busca a Classe da entidade de nome "name"
@@ -299,7 +296,12 @@ public class CRUDHelper {
 			name = name.concat("Document");
 		}
 		try {
-			return (Class<? extends MongoDocument>) Class.forName("tst.campos.model.".concat(name));
+			Class<? extends MongoDocument> clazz = modelClassMap.get(name);
+			if (clazz == null) {
+				clazz = (Class<? extends MongoDocument>) Class.forName("tst.campos.model.".concat(name));
+				modelClassMap.put(name, clazz);
+			}
+			return clazz;
 		} catch (ClassNotFoundException ex) {
 			return null;
 		} catch (Exception ex) {

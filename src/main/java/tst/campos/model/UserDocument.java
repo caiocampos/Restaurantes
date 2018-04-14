@@ -15,6 +15,8 @@ import tst.campos.helper.rules.UserBusinessRule;
 import tst.campos.helper.search.UserSearcher;
 import tst.campos.util.MongoDocument;
 import tst.campos.util.annotation.BusinessRule;
+import tst.campos.util.annotation.DocumentInfo;
+import tst.campos.util.annotation.FieldInfo;
 import tst.campos.util.annotation.SpecialSearch;
 import tst.campos.util.annotation.UserAcessType;
 
@@ -24,9 +26,21 @@ import tst.campos.util.annotation.UserAcessType;
  * @author Caio
  */
 @Document(collection = "user")
-@BusinessRule(UserBusinessRule.class)
-@UserAcessType(create = false, read = true, update = false, delete = false)
-@SpecialSearch(searcher = UserSearcher.class, queries = "nomeParcialSemCaixa")
+@DocumentInfo(
+		title = "Usuários",
+		descrption = "Usuários do Sistema",
+		rule = @BusinessRule(UserBusinessRule.class),
+		userAcess = @UserAcessType(create = false, read = true, update = false, delete = false),
+		specialSearch = @SpecialSearch(searcher = UserSearcher.class, queries = "nomeParcialSemCaixa"),
+		fields = {
+			@FieldInfo(name = "nome", label = "Nome")
+			, @FieldInfo(name = "sobrenome", label = "Sobrenome")
+			, @FieldInfo(name = "username", label = "Nome de usuário")
+			, @FieldInfo(name = "password", label = "Senha", type = FieldInfo.FieldType.PASS)
+			, @FieldInfo(name = "roles", label = "Acessos", type = FieldInfo.FieldType.LIST)
+			, @FieldInfo(name = "enabled", label = "Ativo", type = FieldInfo.FieldType.TOGGLE)
+		}
+)
 public class UserDocument implements UserDetails, MongoDocument, Serializable {
 
 	private static final long serialVersionUID = 1L;

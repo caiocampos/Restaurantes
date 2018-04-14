@@ -7,6 +7,8 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import tst.campos.helper.search.PratoSearcher;
 import tst.campos.util.MongoDocument;
+import tst.campos.util.annotation.DocumentInfo;
+import tst.campos.util.annotation.FieldInfo;
 import tst.campos.util.annotation.SpecialSearch;
 import tst.campos.util.annotation.UserAcessType;
 
@@ -16,8 +18,17 @@ import tst.campos.util.annotation.UserAcessType;
  * @author Caio
  */
 @Document(collection = "prato")
-@UserAcessType(create = true, read = true, update = true, delete = true)
-@SpecialSearch(searcher = PratoSearcher.class, queries = "nomeParcialSemCaixa")
+@DocumentInfo(
+		title = "Pratos",
+		descrption = "Pratos disponíveis",
+		userAcess = @UserAcessType(create = true, read = true, update = true, delete = true),
+		specialSearch = @SpecialSearch(searcher = PratoSearcher.class, queries = "nomeParcialSemCaixa"),
+		fields = {
+			@FieldInfo(name = "nome", label = "Nome")
+			, @FieldInfo(name = "preco", label = "Preço", type = FieldInfo.FieldType.VALUE)
+			, @FieldInfo(name = "restaurante", label = "Restaurante", type = FieldInfo.FieldType.FOREIGN)
+		}
+)
 public class PratoDocument implements MongoDocument, Serializable {
 
 	private static final long serialVersionUID = 1L;
