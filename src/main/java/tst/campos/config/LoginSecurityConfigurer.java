@@ -1,12 +1,17 @@
 package tst.campos.config;
 
+import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import tst.campos.service.LoginService;
 
@@ -39,6 +44,18 @@ public class LoginSecurityConfigurer extends WebSecurityConfigurerAdapter {
 		auth.userDetailsService(loginService).passwordEncoder(bCryptPasswordEncoder);
 	}
 
+	@Bean
+	CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration configuration = new CorsConfiguration();
+		configuration.setAllowedOrigins(Arrays.asList("*"));
+		configuration.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS", "DELETE", "PUT", "PATCH"));
+		configuration.setAllowedHeaders(Arrays.asList("X-Requested-With", "Origin", "Content-Type", "Accept", "Authorization"));
+		configuration.setAllowCredentials(true);
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", configuration);
+		return source;
+	}
+
 	/**
 	 * Cofigura os acessos possíveis ao sistema, permite acesso ao login, ao
 	 * logout e ao "/public", demeais requisições somente se autenticado
@@ -47,13 +64,14 @@ public class LoginSecurityConfigurer extends WebSecurityConfigurerAdapter {
 	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests()
-				.antMatchers("/public").permitAll()
-				.anyRequest().authenticated()
-				.and()
-				.formLogin()
+		http.cors().and().csrf().disable()
+				.formLogin().successForwardUrl("/user")
 				.usernameParameter("username").passwordParameter("password")
 				.permitAll()
+				.and()
+				.authorizeRequests()
+				.antMatchers("/public", "/login").permitAll()
+				.anyRequest().authenticated()
 				.and()
 				.logout()
 				.permitAll();

@@ -25,6 +25,7 @@ public class LoginService implements UserDetailsService {
 
 	/**
 	 * Busca o usuário pelo "username"
+	 *
 	 * @param login
 	 */
 	@Override
