@@ -43,6 +43,8 @@ public class CRUDHelper {
 	 */
 	private final Map<Class, MongoRepository> repositoryMap;
 
+	private final Map<String, Class<? extends MongoDocument>> modelClassMap = new HashMap();
+
 	/**
 	 * Construtor do Helper, instancia a Fábrica de Beans e o Mapa de
 	 * Repositórios
@@ -280,8 +282,6 @@ public class CRUDHelper {
 		}
 		return false;
 	}
-
-	private final HashMap<String, Class<? extends MongoDocument>> modelClassMap = new HashMap();
 
 	/**
 	 * Busca a Classe da entidade de nome "name"
