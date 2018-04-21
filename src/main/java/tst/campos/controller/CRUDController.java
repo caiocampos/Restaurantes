@@ -89,7 +89,7 @@ public class CRUDController {
 	 */
 	@RequestMapping("/save")
 	public @ResponseBody
-	ResponseEntity<String> save(@RequestBody CRUDRequest req) throws BadRequestException {
+	ResponseEntity<Object> save(@RequestBody CRUDRequest req) throws BadRequestException {
 		return new ResponseEntity<>(crudService.save(req), HttpStatus.OK);
 	}
 

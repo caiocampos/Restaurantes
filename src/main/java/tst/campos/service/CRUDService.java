@@ -140,7 +140,7 @@ public class CRUDService {
 	 * @return Id do registro salvo
 	 * @throws tst.campos.util.BadRequestException
 	 */
-	public String save(CRUDRequest req) throws BadRequestException {
+	public Object save(CRUDRequest req) throws BadRequestException {
 		Class<?> clazz = entityInfoService.getModelClass(req.entity);
 		if (clazz == null || req.data == null) {
 			throw new BadRequestException("Não foi possível salvar os dados, não foi possível recuperar alguns dados.");
@@ -166,7 +166,7 @@ public class CRUDService {
 					data = rule.onSave(data);
 				}
 				data = (MongoDocument) repo.save(data);
-				return data.getId();
+				return data;
 			} catch (BeansException ex) {
 				throw new BadRequestException("Não foi possível validar as regras da entidade.");
 			} catch (BadRequestException ex) {

@@ -17,6 +17,8 @@ public class EntityInfoService {
 
 	public static final String MODEL_PACKAGE = "tst.campos.model.";
 
+	public static final String SUFFIX = "Document";
+
 	private final Map<String, Class<? extends MongoDocument>> modelClassMap = new HashMap<>();
 
 	@Autowired
@@ -31,8 +33,8 @@ public class EntityInfoService {
 	public Class<? extends MongoDocument> getModelClass(String name) {
 		if (name == null || name.isEmpty()) {
 			return null;
-		} else if (!name.endsWith("Document")) {
-			name = name.concat("Document");
+		} else if (!name.endsWith(SUFFIX)) {
+			name = name.concat(SUFFIX);
 		}
 		try {
 			Class<? extends MongoDocument> clazz = modelClassMap.get(name);
@@ -71,7 +73,7 @@ public class EntityInfoService {
 		if (info == null) {
 			return null;
 		}
-		String entity = clazz.getName().replace(MODEL_PACKAGE, "");
+		String entity = clazz.getName().replace(MODEL_PACKAGE, "").replace(SUFFIX, "");
 		return new EntityInfoResponse(info, entity);
 	}
 }
