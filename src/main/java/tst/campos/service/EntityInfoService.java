@@ -15,6 +15,8 @@ import tst.campos.util.annotation.DocumentInfo;
 @Service
 public class EntityInfoService {
 
+	public static final String MODEL_PACKAGE = "tst.campos.model.";
+
 	private final Map<String, Class<? extends MongoDocument>> modelClassMap = new HashMap<>();
 
 	@Autowired
@@ -35,7 +37,7 @@ public class EntityInfoService {
 		try {
 			Class<? extends MongoDocument> clazz = modelClassMap.get(name);
 			if (clazz == null) {
-				clazz = (Class<? extends MongoDocument>) Class.forName("tst.campos.model.".concat(name));
+				clazz = (Class<? extends MongoDocument>) Class.forName(MODEL_PACKAGE.concat(name));
 				modelClassMap.put(name, clazz);
 			}
 			return clazz;
@@ -65,12 +67,11 @@ public class EntityInfoService {
 		if (clazz == null) {
 			return null;
 		}
-
 		DocumentInfo info = clazz.getAnnotation(DocumentInfo.class);
 		if (info == null) {
 			return null;
 		}
-
-		return new EntityInfoResponse(info);
+		String entity = clazz.getName().replace(MODEL_PACKAGE, "");
+		return new EntityInfoResponse(info, entity);
 	}
 }

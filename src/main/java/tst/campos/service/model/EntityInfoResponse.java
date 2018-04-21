@@ -8,13 +8,15 @@ import tst.campos.util.annotation.UserAcessPermissions;
 
 public class EntityInfoResponse {
 
+	public String entity;
 	public String title;
 	public String description;
 	public EntityInfoAcess userAcess;
 	public String[] queries = {};
 	public EntityInfoField[] fields = {};
 
-	public EntityInfoResponse(DocumentInfo info) {
+	public EntityInfoResponse(DocumentInfo info, String entity) {
+		this.entity = entity;
 		title = info.title();
 		description = info.descrption();
 		userAcess = new EntityInfoAcess(info.userAcess());
