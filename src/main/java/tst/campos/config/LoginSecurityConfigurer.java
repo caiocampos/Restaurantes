@@ -1,6 +1,7 @@
 package tst.campos.config;
 
 import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,11 +9,11 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import tst.campos.helper.SecurityHelper;
 import tst.campos.service.LoginService;
 
 /**
@@ -25,14 +26,13 @@ import tst.campos.service.LoginService;
 public class LoginSecurityConfigurer extends WebSecurityConfigurerAdapter {
 
 	/**
-	 * Instância do codificador e decoficador usado na senha
-	 */
-	private final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-	/**
 	 * Serviço de Login, que controla algumas informações de Usuário
 	 */
 	@Autowired
 	private LoginService loginService;
+
+	@Autowired
+	private SecurityHelper securityHelper;
 
 	/**
 	 * Cofigura a autenticação
@@ -41,7 +41,7 @@ public class LoginSecurityConfigurer extends WebSecurityConfigurerAdapter {
 	 */
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(loginService).passwordEncoder(bCryptPasswordEncoder);
+		auth.userDetailsService(loginService).passwordEncoder(securityHelper.getCryptPasswordEncoder());
 	}
 
 	@Bean
@@ -64,16 +64,21 @@ public class LoginSecurityConfigurer extends WebSecurityConfigurerAdapter {
 	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.cors().and().csrf().disable()
+		http.csrf().disable().cors()
+				//.and()
+				//.exceptionHandling()
+				.and()
+				.authorizeRequests()
+				.antMatchers("/public", "/login", "/entity/list").permitAll()
+				.anyRequest().authenticated()
+				.and()
 				.formLogin().successForwardUrl("/user")
 				.usernameParameter("username").passwordParameter("password")
 				.permitAll()
 				.and()
-				.authorizeRequests()
-				.antMatchers("/public", "/login").permitAll()
-				.anyRequest().authenticated()
-				.and()
 				.logout()
+        		.invalidateHttpSession(true)
+        		.deleteCookies()
 				.permitAll();
 	}
 }

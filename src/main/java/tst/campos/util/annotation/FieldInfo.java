@@ -22,4 +22,8 @@ public @interface FieldInfo {
 	FieldType type() default FieldType.TEXT;
 
 	String[] options() default {};
+
+	boolean required() default false;
+
+	int size() default 3;
 }

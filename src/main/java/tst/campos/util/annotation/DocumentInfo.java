@@ -18,7 +18,7 @@ public @interface DocumentInfo {
 
 	String descrption() default "";
 
-	UserAcessType userAcess() default @UserAcessType(create = false, read = true, update = false, delete = false);
+	UserAcessPermissions userAcess() default @UserAcessPermissions;
 
 	BusinessRule[] rule() default {};
 

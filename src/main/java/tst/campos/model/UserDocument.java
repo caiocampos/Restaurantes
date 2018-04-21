@@ -3,22 +3,23 @@ package tst.campos.model;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
-import tst.campos.helper.rules.UserBusinessRule;
-import tst.campos.helper.search.UserSearcher;
+
+import tst.campos.service.rules.UserBusinessRule;
+import tst.campos.service.search.UserSearcher;
 import tst.campos.util.MongoDocument;
 import tst.campos.util.annotation.BusinessRule;
 import tst.campos.util.annotation.DocumentInfo;
 import tst.campos.util.annotation.FieldInfo;
 import tst.campos.util.annotation.SpecialSearch;
-import tst.campos.util.annotation.UserAcessType;
+import tst.campos.util.annotation.UserAcessPermissions;
 
 /**
  * Entidade de Usuário
@@ -30,13 +31,13 @@ import tst.campos.util.annotation.UserAcessType;
 		title = "Usuários",
 		descrption = "Usuários do Sistema",
 		rule = @BusinessRule(UserBusinessRule.class),
-		userAcess = @UserAcessType(create = false, read = true, update = false, delete = false),
+		userAcess = @UserAcessPermissions(create = false, read = true, update = false, delete = false),
 		specialSearch = @SpecialSearch(searcher = UserSearcher.class, queries = "nomeParcialSemCaixa"),
 		fields = {
-			@FieldInfo(name = "nome", label = "Nome")
+			@FieldInfo(name = "nome", label = "Nome", required = true)
 			, @FieldInfo(name = "sobrenome", label = "Sobrenome")
-			, @FieldInfo(name = "username", label = "Nome de usuário")
-			, @FieldInfo(name = "password", label = "Senha", type = FieldInfo.FieldType.PASS)
+			, @FieldInfo(name = "username", label = "Nome de usuário", required = true)
+			, @FieldInfo(name = "password", label = "Senha", type = FieldInfo.FieldType.PASS, required = true)
 			, @FieldInfo(name = "roles", label = "Acessos", type = FieldInfo.FieldType.LIST)
 			, @FieldInfo(name = "enabled", label = "Ativo", type = FieldInfo.FieldType.TOGGLE)
 		}
@@ -54,7 +55,7 @@ public class UserDocument implements UserDetails, MongoDocument, Serializable {
 	@Transient
 	private List<GrantedAuthority> authorities;
 
-	private String[] roles;
+	private String[] roles = {};
 	private String password;
 	private String nome;
 	private String sobrenome;
