@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import tst.campos.service.search.PratoSearcher;
 import tst.campos.util.MongoDocument;
 import tst.campos.util.annotation.DocumentInfo;
+import tst.campos.util.annotation.FKInfo;
 import tst.campos.util.annotation.FieldInfo;
 import tst.campos.util.annotation.SpecialSearch;
 import tst.campos.util.annotation.UserAcessPermissions;
@@ -28,7 +29,9 @@ import tst.campos.util.annotation.UserAcessPermissions;
 		fields = {
 			@FieldInfo(name = "nome", label = "Nome", required = true)
 			, @FieldInfo(name = "preco", label = "Preço", type = FieldInfo.FieldType.VALUE)
-			, @FieldInfo(name = "restaurante", label = "Restaurante", type = FieldInfo.FieldType.FOREIGN)
+			, @FieldInfo(name = "restaurante", label = "Restaurante", type = FieldInfo.FieldType.FOREIGN,
+					fk = @FKInfo(entity = "RestauranteDocument", param = "nome", search = "nomeParcialSemCaixa")
+			)
 		}
 )
 public class PratoDocument implements MongoDocument, Serializable {

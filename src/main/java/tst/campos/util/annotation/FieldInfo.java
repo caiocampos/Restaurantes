@@ -16,12 +16,14 @@ public @interface FieldInfo {
 	String label();
 
 	enum FieldType {
-		TEXT, TEXTAREA, NUMBER, VALUE, PHONE, TOGGLE, LIST, PASS, FOREIGN
+		TEXT, TEXTAREA, NUMBER, VALUE, PHONE, TOGGLE, SELECT, LIST, PASS, FOREIGN
 	};
 
 	FieldType type() default FieldType.TEXT;
 
-	String[] options() default {};
+	String[] options() default {}; // Opções de SELECT e filtro para LIST
+	
+	FKInfo[] fk() default {};
 
 	boolean required() default false;
 

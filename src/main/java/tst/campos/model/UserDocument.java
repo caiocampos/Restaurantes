@@ -38,8 +38,8 @@ import tst.campos.util.annotation.UserAcessPermissions;
 			, @FieldInfo(name = "sobrenome", label = "Sobrenome")
 			, @FieldInfo(name = "username", label = "Nome de usuário", required = true)
 			, @FieldInfo(name = "password", label = "Senha", type = FieldInfo.FieldType.PASS, required = true)
-			, @FieldInfo(name = "roles", label = "Acessos", type = FieldInfo.FieldType.LIST)
-			, @FieldInfo(name = "enabled", label = "Ativo", type = FieldInfo.FieldType.TOGGLE)
+			, @FieldInfo(name = "roles", label = "Acessos", type = FieldInfo.FieldType.LIST, options = {"user", "admin"})
+			, @FieldInfo(name = "enabled", label = "Ativo", type = FieldInfo.FieldType.TOGGLE, size = 1)
 		}
 )
 public class UserDocument implements UserDetails, MongoDocument, Serializable {

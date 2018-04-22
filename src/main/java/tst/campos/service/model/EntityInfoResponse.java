@@ -3,6 +3,7 @@ package tst.campos.service.model;
 import java.util.ArrayList;
 
 import tst.campos.util.annotation.DocumentInfo;
+import tst.campos.util.annotation.FKInfo;
 import tst.campos.util.annotation.FieldInfo;
 import tst.campos.util.annotation.UserAcessPermissions;
 
@@ -57,6 +58,7 @@ public class EntityInfoResponse {
 		public String label;
 		public String type;
 		public String[] options;
+		public EntityInfoFK fk;
 		public boolean required;
 		public int size;
 
@@ -67,6 +69,22 @@ public class EntityInfoResponse {
 			options = info.options();
 			required = info.required();
 			size = info.size();
+			if (info.fk() != null && info.fk().length > 0) {
+				fk = new EntityInfoFK(info.fk()[0]);
+			}
+		}
+	}
+
+	public static class EntityInfoFK {
+
+		public String entity;
+		public String search;
+		public String param;
+
+		public EntityInfoFK(FKInfo info) {
+			entity = info.entity();
+			search = info.search();
+			param = info.param();
 		}
 	}
 }

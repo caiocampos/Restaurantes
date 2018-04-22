@@ -30,7 +30,7 @@ import tst.campos.util.annotation.UserAcessPermissions;
 		fields = {
 			@FieldInfo(name = "nome", label = "Nome", required = true)
 			, @FieldInfo(name = "telefone", label = "Telefone", type = FieldInfo.FieldType.PHONE)
-			, @FieldInfo(name = "endereco", label = "Endereco", type = FieldInfo.FieldType.TEXTAREA)
+			, @FieldInfo(name = "endereco", label = "Endereço", type = FieldInfo.FieldType.TEXTAREA)
 		}
 )
 public class RestauranteDocument implements MongoDocument, Serializable {
