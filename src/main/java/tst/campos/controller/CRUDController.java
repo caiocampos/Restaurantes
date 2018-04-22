@@ -102,7 +102,7 @@ public class CRUDController {
 	 */
 	@RequestMapping("/delete")
 	public @ResponseBody
-	ResponseEntity<String> delete(@RequestBody CRUDRequest req) throws BadRequestException {
+	ResponseEntity<Object> delete(@RequestBody CRUDRequest req) throws BadRequestException {
 		return new ResponseEntity<>(crudService.delete(req), HttpStatus.OK);
 	}
 }

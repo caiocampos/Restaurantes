@@ -186,13 +186,14 @@ public class CRUDService {
 	 * @return Id do registro apagado
 	 * @throws tst.campos.util.BadRequestException
 	 */
-	public String delete(CRUDRequest req) throws BadRequestException {
+	public Object delete(CRUDRequest req) throws BadRequestException {
 		Class<?> clazz = entityInfoService.getModelClass(req.entity);
 		if (clazz != null && canCRUD(CRUDType.DELETE, clazz)) {
 			MongoRepository repo = repositoryService.getRepositoryFor(clazz);
 			BadRequestException.assertNotNull(repo, "Não foi possível carregar o Repositório.");
+			MongoDocument data;
 			try {
-				MongoDocument data = (MongoDocument) repo.findById(req.id).get();
+				data = (MongoDocument) repo.findById(req.id).get();
 				DocumentInfo info = clazz.getAnnotation(DocumentInfo.class);
 				if (info != null && info.rule().length > 0) {
 					Class<? extends BusinessRuleAdapter> ruleClass = info.rule()[0].value();
@@ -207,7 +208,7 @@ public class CRUDService {
 			} catch (Exception ex) {
 				throw new BadRequestException("Não foi possível apagar os dados.");
 			}
-			return req.id;
+			return data;
 		} else {
 			throw new BadRequestException("Não foi possível apagar os dados, ação não é permitida.");
 		}

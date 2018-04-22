@@ -41,7 +41,7 @@ public class RestauranteBusinessRule extends BusinessRuleAdapter<RestauranteDocu
 	public RestauranteDocument onSave(RestauranteDocument doc) throws BadRequestException {
 		if (doc.getNome() == null || doc.getNome().isEmpty()) {
 			throw new BadRequestException("O nome não pode estar vazio.");
-		} else if (restauranteDocumentRepo.findOneByNome(doc.getNome()) != null) {
+		} else if (doc.getId() == null && restauranteDocumentRepo.findOneByNome(doc.getNome()) != null) {
 			throw new BadRequestException("Restaurante já existe.");
 		} else if (doc.getTelefone() != null) {
 			doc.setTelefone(doc.getTelefone().replaceAll("[^\\d-]", ""));
