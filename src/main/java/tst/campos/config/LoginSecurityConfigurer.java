@@ -31,6 +31,9 @@ public class LoginSecurityConfigurer extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private LoginService loginService;
 
+	/**
+	 * Helper de segurança que possui o encoder
+	 */
 	@Autowired
 	private SecurityHelper securityHelper;
 
@@ -44,6 +47,9 @@ public class LoginSecurityConfigurer extends WebSecurityConfigurerAdapter {
 		auth.userDetailsService(loginService).passwordEncoder(securityHelper.getCryptPasswordEncoder());
 	}
 
+	/**
+	 * Bean de configuração do Cors
+	 */
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration configuration = new CorsConfiguration();
@@ -69,7 +75,7 @@ public class LoginSecurityConfigurer extends WebSecurityConfigurerAdapter {
 				//.exceptionHandling()
 				.and()
 				.authorizeRequests()
-				.antMatchers("/public", "/login", "/entity/list").permitAll()
+				.antMatchers("/login", "/entity/list").permitAll()
 				.anyRequest().authenticated()
 				.and()
 				.formLogin().successForwardUrl("/user")

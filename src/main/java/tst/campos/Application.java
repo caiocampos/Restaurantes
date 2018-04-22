@@ -27,8 +27,12 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
+	/**
+	 * Redirecionador
+	 * @return apontamento para o login
+	 */
 	@GetMapping(value = "/{path:[^\\.]*}")
 	public String redirect() {
-		return "forward:/";
+		return "forward:/login";
 	}
 }

@@ -12,15 +12,32 @@ import tst.campos.service.model.EntityInfoResponse;
 import tst.campos.util.MongoDocument;
 import tst.campos.util.annotation.DocumentInfo;
 
+/**
+ * Serviço de controle de informações de Entidades
+ *
+ * @author Caio
+ */
 @Service
 public class EntityInfoService {
 
+	/**
+	 * Pacote das entidades
+	 */
 	public static final String MODEL_PACKAGE = "tst.campos.model.";
 
+	/**
+	 * Sufixo das entidades
+	 */
 	public static final String SUFFIX = "Document";
 
+	/**
+	 * Mapa de entidades indexadas pelo Nome
+	 */
 	private final Map<String, Class<? extends MongoDocument>> modelClassMap = new HashMap<>();
 
+	/**
+	 * Serviço de controle de Repositórios
+	 */
 	@Autowired
 	private RepositoryService repositoryService;
 
@@ -50,6 +67,10 @@ public class EntityInfoService {
 		}
 	}
 
+	/**
+	 * Lista as informações de entidades
+	 * @return Informações das Entidades do Sistema
+	 */
 	public List<EntityInfoResponse> listEntityInfo() {
 		List<EntityInfoResponse> list = new ArrayList<>();
 		repositoryService.listMongoDocuments().stream()
@@ -61,10 +82,20 @@ public class EntityInfoService {
 		return list;
 	}
 
+	/**
+	 * Recupera as informações de um entidade pelo nome
+	 * @param name nome da Entidade
+	 * @return Informações da Entidade
+	 */
 	public EntityInfoResponse getEntityInfo(String name) {
 		return getEntityInfo(getModelClass(name));
 	}
 
+	/**
+	 * Recupera as informações de um entidade pela classe
+	 * @param clazz Classe da Entidade
+	 * @return Informações da Entidade
+	 */
 	public EntityInfoResponse getEntityInfo(Class<?> clazz) {
 		if (clazz == null) {
 			return null;

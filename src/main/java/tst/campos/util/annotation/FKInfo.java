@@ -1,6 +1,7 @@
 package tst.campos.util.annotation;
 
 /**
+ * Anotação que engloba todas as informações de Campos do tipo 'FOREIGN'
  *
  * @author Caio
  */

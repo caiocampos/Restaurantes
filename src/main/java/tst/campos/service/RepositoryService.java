@@ -9,6 +9,11 @@ import org.springframework.core.GenericTypeResolver;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Service;
 
+/**
+ * Serviço de controle de Repositórios
+ *
+ * @author Caio
+ */
 @Service
 public class RepositoryService {
 
@@ -16,6 +21,7 @@ public class RepositoryService {
 	 * Fábrica de Beans, usada para buscar os repositórios Mongo existentes
 	 */
 	private final ListableBeanFactory beanFactory;
+
 	/**
 	 * Mapa de Repositórios indexados pela Classe
 	 */
@@ -59,6 +65,11 @@ public class RepositoryService {
 		return mongoRepositoryMap.get(clazz);
 	}
 
+	/**
+	 * Lista as classes de Documentos Mongo Existentes no sistema
+	 *
+	 * @return Classes de Documentos do Mongo
+	 */
 	public Set<Class> listMongoDocuments() {
 		return mongoRepositoryMap.keySet();
 	}

@@ -27,7 +27,7 @@ import tst.campos.util.annotation.DocumentInfo;
 import tst.campos.util.annotation.SpecialSearch;
 
 /**
- * Helper de controle de Dados, define métodos de salvar, atualizar, apagar e
+ * Serviço de controle de Dados, define métodos de salvar, atualizar, apagar e
  * listar entidades
  *
  * @author Caio
@@ -40,14 +40,20 @@ public class CRUDService {
 	 */
 	private final ListableBeanFactory beanFactory;
 
+	/**
+	 * Serviço de controle de Repositórios
+	 */
 	@Autowired
 	private RepositoryService repositoryService;
 
+	/**
+	 * Serviço de controle de informações de Entidades
+	 */
 	@Autowired
 	private EntityInfoService entityInfoService;
 
 	/**
-	 * Construtor do Helper, instancia a Fábrica de Beans e o Mapa de
+	 * Construtor do Serviço, instancia a Fábrica de Beans e o Mapa de
 	 * Repositórios
 	 *
 	 * @param factory Fábrica de Beans necessária na busca por Repositórios
@@ -137,7 +143,7 @@ public class CRUDService {
 	 * Persiste dados para uma entidade específica
 	 *
 	 * @param req requisição feita ao CRUDService
-	 * @return Id do registro salvo
+	 * @return O registro salvo
 	 * @throws tst.campos.util.BadRequestException
 	 */
 	public Object save(CRUDRequest req) throws BadRequestException {
@@ -183,7 +189,7 @@ public class CRUDService {
 	 * Apaga um registro pelo Id
 	 *
 	 * @param req requisição feita ao CRUDService
-	 * @return Id do registro apagado
+	 * @return O registro apagado
 	 * @throws tst.campos.util.BadRequestException
 	 */
 	public Object delete(CRUDRequest req) throws BadRequestException {

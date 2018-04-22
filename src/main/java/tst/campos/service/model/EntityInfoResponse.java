@@ -7,6 +7,11 @@ import tst.campos.util.annotation.FKInfo;
 import tst.campos.util.annotation.FieldInfo;
 import tst.campos.util.annotation.UserAcessPermissions;
 
+/**
+ * Classe com dados da resposta usada no EntityInfoService
+ *
+ * @author Caio
+ */
 public class EntityInfoResponse {
 
 	public String entity;

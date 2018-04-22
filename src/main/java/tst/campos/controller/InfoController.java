@@ -10,14 +10,25 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import tst.campos.service.EntityInfoService;
-import tst.campos.util.BadRequestException;
 
+/**
+ * Componente que retorna as informações
+ *
+ * @author Caio
+ */
 @RestController("infoController")
 public class InfoController {
 
+	/**
+	 * Serviço de controle de informações de Entidades
+	 */
 	@Autowired
 	EntityInfoService entityInfoService;
 
+	/**
+	 * Retorna o Usuário que está acessando o Sistema
+	 * @return Usuário que está acessando o Sistema
+	 */
 	@RequestMapping("/user")
 	@ResponseBody
 	public Object user() {
@@ -25,9 +36,13 @@ public class InfoController {
 		return authentication == null ? null : authentication.getPrincipal();
 	}
 
+	/**
+	 * Retorna as Informações das Entidades do Sistema
+	 * @return Lista com Informações de Todas as Entidades do Sistema
+	 */
 	@RequestMapping("/entity/list")
 	@ResponseBody
-	public ResponseEntity<Object[]> findAll() throws BadRequestException {
+	public ResponseEntity<Object[]> entityList() {
 		return new ResponseEntity<>(entityInfoService.listEntityInfo().toArray(), HttpStatus.OK);
 	}
 }
