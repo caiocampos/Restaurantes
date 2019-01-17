@@ -12,6 +12,7 @@ import tst.campos.util.Searcher;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SpecialSearch {
 
+	@SuppressWarnings("rawtypes")
 	Class<? extends Searcher> searcher();
 
 	String[] queries();

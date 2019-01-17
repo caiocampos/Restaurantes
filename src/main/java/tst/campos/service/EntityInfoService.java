@@ -47,6 +47,7 @@ public class EntityInfoService {
 	 * @param name Nome da entidade
 	 * @return Classe da entidade
 	 */
+	@SuppressWarnings("unchecked")
 	public Class<? extends MongoDocument> getModelClass(String name) {
 		if (name == null || name.isEmpty()) {
 			return null;

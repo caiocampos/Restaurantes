@@ -12,5 +12,6 @@ import tst.campos.util.BusinessRuleAdapter;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface BusinessRule {
 
+	@SuppressWarnings("rawtypes")
 	Class<? extends BusinessRuleAdapter> value();
 }

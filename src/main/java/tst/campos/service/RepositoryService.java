@@ -25,6 +25,7 @@ public class RepositoryService {
 	/**
 	 * Mapa de Repositórios indexados pela Classe
 	 */
+	@SuppressWarnings("rawtypes")
 	private final Map<Class, MongoRepository> mongoRepositoryMap;
 
 	/**
@@ -42,6 +43,7 @@ public class RepositoryService {
 	 * Busca os Repositórios Mongo e instancia um mapa com elas indexadas pela
 	 * Classe
 	 */
+	@SuppressWarnings("rawtypes")
 	private Map<Class, MongoRepository> mongoRepositoryMap() {
 		Map<Class, MongoRepository> repositories = new HashMap<>();
 		Map<String, MongoRepository> repos = this.beanFactory.getBeansOfType(MongoRepository.class);
@@ -70,6 +72,7 @@ public class RepositoryService {
 	 *
 	 * @return Classes de Documentos do Mongo
 	 */
+	@SuppressWarnings("rawtypes")
 	public Set<Class> listMongoDocuments() {
 		return mongoRepositoryMap.keySet();
 	}

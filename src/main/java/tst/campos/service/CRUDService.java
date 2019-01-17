@@ -69,6 +69,7 @@ public class CRUDService {
 	 * @return Instancia da entidade buscada
 	 * @throws tst.campos.util.BadRequestException
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Object findOne(CRUDRequest req) throws BadRequestException {
 		Class<?> clazz = entityInfoService.getModelClass(req.entity);
 		if (clazz != null && canCRUD(CRUDType.READ, clazz)) {
@@ -91,6 +92,7 @@ public class CRUDService {
 	 * @return Lista de todos os registros da entidade buscada
 	 * @throws tst.campos.util.BadRequestException
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public List<Object> findAll(CRUDRequest req) throws BadRequestException {
 		Class<?> clazz = entityInfoService.getModelClass(req.entity);
 		if (clazz != null && canCRUD(CRUDType.READ, clazz)) {
@@ -113,6 +115,7 @@ public class CRUDService {
 	 * @return Lista de registros que correspondem à busca na entidade buscada
 	 * @throws tst.campos.util.BadRequestException
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public List<Object> findSpecial(CRUDRequest req) throws BadRequestException {
 		Class<?> clazz = entityInfoService.getModelClass(req.entity);
 		if (clazz != null && canCRUD(CRUDType.READ, clazz)) {
@@ -146,6 +149,7 @@ public class CRUDService {
 	 * @return O registro salvo
 	 * @throws tst.campos.util.BadRequestException
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Object save(CRUDRequest req) throws BadRequestException {
 		Class<?> clazz = entityInfoService.getModelClass(req.entity);
 		if (clazz == null || req.data == null) {
@@ -192,6 +196,7 @@ public class CRUDService {
 	 * @return O registro apagado
 	 * @throws tst.campos.util.BadRequestException
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Object delete(CRUDRequest req) throws BadRequestException {
 		Class<?> clazz = entityInfoService.getModelClass(req.entity);
 		if (clazz != null && canCRUD(CRUDType.DELETE, clazz)) {

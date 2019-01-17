@@ -145,6 +145,7 @@ public class BadRequestException extends Exception {
 	 * @param mensagem Mensagem da exceção
 	 * @throws tst.campos.util.BadRequestException
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void assertNotEquals(Object o, Object value, String mensagem) throws BadRequestException {
 		if (o == null) {
 			// o == null && value == null
@@ -197,6 +198,7 @@ public class BadRequestException extends Exception {
 	 * @param mensagem Mensagem da exceção
 	 * @throws tst.campos.util.BadRequestException
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void assertEquals(Object o, Object value, String mensagem) throws BadRequestException {
 		if (o == null) {
 			// o == null && value != null
