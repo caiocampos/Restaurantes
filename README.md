@@ -1,6 +1,6 @@
 # Restaurantes (Restaurante's)
 
-Software com login, gestão de autoridades e CRUD de entidades, usando Java, Spring, Angular 5, Bootstrap 4 e MongoDB
+Software com login, gestão de autoridades e CRUD de entidades, usando Java, Spring, Angular 8, Bootstrap 4 e MongoDB
 
 ## [Projeto Front-end](https://github.com/caiocampos/restaurantes-app)
 
