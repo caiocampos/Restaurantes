@@ -39,3 +39,4 @@ buildNumber.properties
 nbactions.xml
 *.project
 *.classpath
+.attach_pid*
