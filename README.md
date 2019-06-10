@@ -14,7 +14,7 @@ Siga as instruções do site a seguir para instalar e configurar o Maven:
 
 http://luizricardo.org/2014/06/instalando-configurando-e-usando-o-maven-para-gerenciar-suas-dependencias-e-seus-projetos-java/
 
-Com o Maven configurado basta executar o seguinte comando na pasta do projeto:
+Com o Maven configurado basta executar na pasta do projeto um comando conforme o exemplo:
 
 > SPRING_APPLICATION_JSON='{"mongoUser":"###","mongoUserP":"###"}' mvn install spring-boot:run
 
@@ -28,7 +28,7 @@ Siga as instruções do site a seguir para instalar e configurar o Gradle:
 
 http://giordanolins.com/instalando-e-configurando-o-gradle-no-windows/
 
-Com o Gradle configurado basta executar o seguinte comando na pasta do projeto:
+Com o Gradle configurado basta executar na pasta do projeto um comando conforme o exemplo:
 
 > SPRING_APPLICATION_JSON='{"mongoUser":"###","mongoUserP":"###"}' gradle build run
 
