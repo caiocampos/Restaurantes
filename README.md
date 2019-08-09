@@ -16,7 +16,13 @@ http://luizricardo.org/2014/06/instalando-configurando-e-usando-o-maven-para-ger
 
 Com o Maven configurado basta executar na pasta do projeto um comando conforme o exemplo:
 
+- Linux
 > SPRING_APPLICATION_JSON='{"mongoUser":"###","mongoUserP":"###"}' mvn install spring-boot:run
+
+- Windows
+> set SPRING_APPLICATION_JSON={"mongoUser":"###","mongoUserP":"###"}
+> mvn install spring-boot:run
+
 
 Ou modifique as configurações do MongoDB no arquivo application.properties (src/main/resources) e execute:
 
@@ -30,7 +36,12 @@ http://giordanolins.com/instalando-e-configurando-o-gradle-no-windows/
 
 Com o Gradle configurado basta executar na pasta do projeto um comando conforme o exemplo:
 
+- Linux
 > SPRING_APPLICATION_JSON='{"mongoUser":"###","mongoUserP":"###"}' gradle build run
+
+- Windows
+> set SPRING_APPLICATION_JSON={"mongoUser":"###","mongoUserP":"###"}
+> gradle build run
 
 Ou modifique as configurações do MongoDB no arquivo application.properties (src/main/resources) e execute:
 
