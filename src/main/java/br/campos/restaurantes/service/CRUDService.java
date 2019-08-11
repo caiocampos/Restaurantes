@@ -159,8 +159,6 @@ public class CRUDService {
 		MongoDocument data = null;
 		try {
 			data = (MongoDocument) mapper.readValue(mapper.writeValueAsString(req.data), clazz);
-		} catch (IOException ex) {
-			throw new BadRequestException("Não foi possível converter os dados enviados.");
 		} catch (Exception ex) {
 			throw new BadRequestException("Não foi possível converter os dados enviados.");
 		}

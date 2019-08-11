@@ -12,6 +12,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import br.campos.restaurantes.service.rules.UserBusinessRule;
 import br.campos.restaurantes.service.search.UserSearcher;
 import br.campos.restaurantes.util.MongoDocument;
@@ -26,6 +29,7 @@ import br.campos.restaurantes.util.annotation.UserAcessPermissions;
  *
  * @author Caio
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Document(collection = "user")
 @DocumentInfo(
 		title = "Usuários",
@@ -53,6 +57,7 @@ public class UserDocument implements UserDetails, MongoDocument, Serializable {
 	private String username;
 
 	@Transient
+	@JsonIgnore
 	private List<GrantedAuthority> authorities;
 
 	private String[] roles = {};
@@ -132,7 +137,7 @@ public class UserDocument implements UserDetails, MongoDocument, Serializable {
 		return roles;
 	}
 
-	public void setRoles(String[] roles) {
+	public void setRoles(String... roles) {
 		this.roles = roles;
 		this.authorities = AuthorityUtils.createAuthorityList(roles);
 	}
