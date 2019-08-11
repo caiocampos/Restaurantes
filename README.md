@@ -1,5 +1,7 @@
 # Restaurantes (Restaurante's)
 
+[![License](https://img.shields.io/github/license/caiocampos/Restaurantes.svg)](LICENSE)
+
 Software com login, gestão de autoridades e CRUD de entidades, usando Java, Spring, Angular 8, Bootstrap 4 e MongoDB
 
 ## [Projeto Front-end](https://github.com/caiocampos/restaurantes-app)
