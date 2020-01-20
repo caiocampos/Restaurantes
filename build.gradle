@@ -18,7 +18,7 @@ repositories {
 dependencies {
     compile 'org.springframework.boot:spring-boot-starter:2.2.3.RELEASE'
     compile 'org.springframework.boot:spring-boot-starter-security:2.2.3.RELEASE'
-    compile 'org.springframework.boot:spring-boot-starter-web:2.2.2.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-web:2.2.3.RELEASE'
     compile 'org.springframework.boot:spring-boot-starter-data-mongodb:2.2.3.RELEASE'
     compile 'org.springframework.data:spring-data-mongodb:2.2.4.RELEASE'
     compile 'org.springframework.boot:spring-boot:2.2.2.RELEASE'
