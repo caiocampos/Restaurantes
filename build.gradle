@@ -22,7 +22,7 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-data-mongodb:2.2.4.RELEASE'
     compile 'org.springframework.data:spring-data-mongodb:2.2.4.RELEASE'
     compile 'org.springframework.boot:spring-boot:2.2.4.RELEASE'
-    testCompile 'org.springframework.boot:spring-boot-starter-test:2.2.4.RELEASE'
+    testCompile 'org.springframework.boot:spring-boot-starter-test:2.2.5.RELEASE'
 }
 
 group = 'br.campos'
