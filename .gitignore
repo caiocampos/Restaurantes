@@ -55,6 +55,8 @@ gradle-app.setting
 **/build/
 
 .settings/
+.dbeaver/ 
+.sts*/ 
 nbactions.xml
 *.project
 *.classpath

@@ -12,7 +12,6 @@ import br.campos.restaurantes.util.Searcher;
 import br.campos.restaurantes.util.annotation.DocumentInfo;
 import br.campos.restaurantes.util.annotation.SpecialSearch;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
