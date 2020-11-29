@@ -4,7 +4,7 @@
 [![GuardRails Badge](https://badges.guardrails.io/caiocampos/Restaurantes.svg)](https://www.guardrails.io/)
 [![License](https://img.shields.io/github/license/caiocampos/Restaurantes.svg)](LICENSE)
 
-Software com login, gestão de autoridades e CRUD de entidades, usando Java, Spring, Angular 10, Bootstrap 4 e MongoDB
+Software com login, gestão de autoridades e CRUD de entidades, usando Java, Spring, Angular 11, Bootstrap 4 e MongoDB
 
 ## [Projeto Front-end](https://github.com/caiocampos/restaurantes-app)
 
