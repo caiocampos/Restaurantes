@@ -16,7 +16,7 @@ repositories {
 }
 
 dependencies {
-    compile 'org.springframework.boot:spring-boot-starter:2.4.0'
+    compile 'org.springframework.boot:spring-boot-starter:2.4.1'
     compile 'org.springframework.boot:spring-boot-starter-security:2.4.0'
     compile 'org.springframework.boot:spring-boot-starter-web:2.4.1'
     compile 'org.springframework.boot:spring-boot-starter-data-mongodb:2.4.0'
