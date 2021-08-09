@@ -11,24 +11,29 @@ plugins {
 repositories {
     mavenLocal()
     maven {
-        url = 'http://repo.maven.apache.org/maven2'
+        url = 'https://repo.maven.apache.org/maven2'
     }
 }
 
 dependencies {
-    compile 'org.springframework.boot:spring-boot-starter:2.4.2'
-    compile 'org.springframework.boot:spring-boot-starter-security:2.4.1'
-    compile 'org.springframework.boot:spring-boot-starter-web:2.4.1'
-    compile 'org.springframework.boot:spring-boot-starter-data-mongodb:2.4.1'
-    compile 'org.springframework.data:spring-data-mongodb:3.1.3'
-    compile 'org.springframework.boot:spring-boot:2.4.1'
-    testCompile 'org.springframework.boot:spring-boot-starter-test:2.4.2'
+    implementation 'org.springframework.boot:spring-boot-starter:2.5.3'
+    implementation 'org.springframework.boot:spring-boot-starter-security:2.5.3'
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.5.3'
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb:2.5.3'
+    implementation 'org.springframework.data:spring-data-mongodb:3.2.3'
+    implementation 'org.springframework.boot:spring-boot:2.5.3'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.3'
 }
 
 group = 'br.campos'
 version = '0.0.1-SNAPSHOT'
 description = 'Restaurante`s'
-sourceCompatibility = '1.8'
+
+java {
+  toolchain {
+    languageVersion.set(JavaLanguageVersion.of(16))
+  }
+}
 
 publishing {
     publications {
