@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,7 +19,6 @@ import br.campos.restaurantes.util.BadRequestException;
  *
  * @author Caio
  */
-@CrossOrigin
 @RestController("crudController")
 public class CRUDController {
 
@@ -37,7 +35,7 @@ public class CRUDController {
 	 * @return Registro encontrado no banco
 	 * @throws br.campos.restaurantes.util.BadRequestException
 	 */
-	@RequestMapping(method = RequestMethod.POST, path = "/findone")
+	@RequestMapping("/findone")
 	public @ResponseBody
 	ResponseEntity<Object> findOne(@RequestBody CRUDRequest req) throws BadRequestException {
 		return new ResponseEntity<>(crudService.findOne(req), HttpStatus.OK);
@@ -50,7 +48,7 @@ public class CRUDController {
 	 * @return Registros encontrados no banco
 	 * @throws br.campos.restaurantes.util.BadRequestException
 	 */
-	@RequestMapping(method = RequestMethod.POST, path = "/findall")
+	@RequestMapping("/findall")
 	public @ResponseBody
 	ResponseEntity<Object[]> findAll(@RequestBody CRUDRequest req) throws BadRequestException {
 		return new ResponseEntity<>(crudService.findAll(req).toArray(), HttpStatus.OK);
@@ -63,7 +61,7 @@ public class CRUDController {
 	 * @return Registros encontrados no banco
 	 * @throws br.campos.restaurantes.util.BadRequestException
 	 */
-	@RequestMapping(method = RequestMethod.POST, path = "/findspecial")
+	@RequestMapping("/findspecial")
 	public @ResponseBody
 	ResponseEntity<Object[]> findByCriteria(@RequestBody CRUDRequest req) throws BadRequestException {
 		return new ResponseEntity<>(crudService.findSpecial(req).toArray(), HttpStatus.OK);
@@ -76,7 +74,7 @@ public class CRUDController {
 	 * @return Registros encontrados no banco
 	 * @throws br.campos.restaurantes.util.BadRequestException
 	 */
-	@RequestMapping(method = RequestMethod.POST, path = "/findnome")
+	@RequestMapping("/findnome")
 	public @ResponseBody
 	ResponseEntity<Object[]> findByNome(@RequestBody CRUDRequest req) throws BadRequestException {
 		req.special = "nomeParcialSemCaixa";
@@ -90,7 +88,7 @@ public class CRUDController {
 	 * @return Id do elemento persistido
 	 * @throws br.campos.restaurantes.util.BadRequestException
 	 */
-	@RequestMapping(method = RequestMethod.POST, path = "/save")
+	@RequestMapping("/save")
 	public @ResponseBody
 	ResponseEntity<Object> save(@RequestBody CRUDRequest req) throws BadRequestException {
 		return new ResponseEntity<>(crudService.save(req), HttpStatus.OK);
@@ -103,7 +101,7 @@ public class CRUDController {
 	 * @return Id do elemento apagado
 	 * @throws br.campos.restaurantes.util.BadRequestException
 	 */
-	@RequestMapping(method = RequestMethod.POST, path = "/delete")
+	@RequestMapping("/delete")
 	public @ResponseBody
 	ResponseEntity<Object> delete(@RequestBody CRUDRequest req) throws BadRequestException {
 		return new ResponseEntity<>(crudService.delete(req), HttpStatus.OK);
