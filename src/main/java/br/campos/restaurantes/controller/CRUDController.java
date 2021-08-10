@@ -19,7 +19,7 @@ import br.campos.restaurantes.util.BadRequestException;
  *
  * @author Caio
  */
-@CrossOrigin(origins = { "https://localhost", "https://caiocampos.github.io" })
+@CrossOrigin(origins = "*")
 @RestController("crudController")
 public class CRUDController {
 

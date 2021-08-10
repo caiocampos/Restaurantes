@@ -17,7 +17,7 @@ import br.campos.restaurantes.service.EntityInfoService;
  *
  * @author Caio
  */
-@CrossOrigin(origins = { "https://localhost", "https://caiocampos.github.io" })
+@CrossOrigin(origins = "*")
 @RestController("infoController")
 public class InfoController {
 
