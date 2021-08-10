@@ -16,6 +16,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import br.campos.restaurantes.helper.SecurityHelper;
 import br.campos.restaurantes.service.LoginService;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 /**
  * Componente que configura a segurança de acesso do projeto
  *
@@ -70,7 +72,8 @@ public class LoginSecurityConfigurer extends WebSecurityConfigurerAdapter {
 	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().and().cors()
+		http.cors(withDefaults());
+		http.csrf()
 				.and()
 				.authorizeRequests()
 				.antMatchers("/login", "/entity/list").permitAll()
