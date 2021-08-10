@@ -8,6 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import br.campos.restaurantes.service.EntityInfoService;
 
@@ -16,6 +17,7 @@ import br.campos.restaurantes.service.EntityInfoService;
  *
  * @author Caio
  */
+@CrossOrigin(origins = { "https://localhost", "https://caiocampos.github.io" })
 @RestController("infoController")
 public class InfoController {
 

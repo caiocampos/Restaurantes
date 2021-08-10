@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import br.campos.restaurantes.service.CRUDService;
 import br.campos.restaurantes.service.model.CRUDRequest;
@@ -18,6 +19,7 @@ import br.campos.restaurantes.util.BadRequestException;
  *
  * @author Caio
  */
+@CrossOrigin(origins = { "https://localhost", "https://caiocampos.github.io" })
 @RestController("crudController")
 public class CRUDController {
 
