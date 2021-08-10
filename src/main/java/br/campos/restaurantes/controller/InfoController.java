@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,6 +18,7 @@ import br.campos.restaurantes.service.EntityInfoService;
  *
  * @author Caio
  */
+@CrossOrigin
 @RestController("infoController")
 public class InfoController {
 
@@ -30,8 +32,7 @@ public class InfoController {
 	 * Retorna o Usuário que está acessando o Sistema
 	 * @return Usuário que está acessando o Sistema
 	 */
-	@CrossOrigin
-	@RequestMapping("/user")
+	@RequestMapping(method = RequestMethod.POST, path = "/user")
 	@ResponseBody
 	public Object user() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -42,8 +43,7 @@ public class InfoController {
 	 * Retorna as Informações das Entidades do Sistema
 	 * @return Lista com Informações de Todas as Entidades do Sistema
 	 */
-	@CrossOrigin
-	@RequestMapping("/entity/list")
+	@RequestMapping(method = RequestMethod.POST, path = "/entity/list")
 	@ResponseBody
 	public ResponseEntity<Object[]> entityList() {
 		return new ResponseEntity<>(entityInfoService.listEntityInfo().toArray(), HttpStatus.OK);
