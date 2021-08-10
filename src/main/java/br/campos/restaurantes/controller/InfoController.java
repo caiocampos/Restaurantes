@@ -17,7 +17,6 @@ import br.campos.restaurantes.service.EntityInfoService;
  *
  * @author Caio
  */
-@CrossOrigin(origins = "*")
 @RestController("infoController")
 public class InfoController {
 
@@ -31,6 +30,7 @@ public class InfoController {
 	 * Retorna o Usuário que está acessando o Sistema
 	 * @return Usuário que está acessando o Sistema
 	 */
+	@CrossOrigin
 	@RequestMapping("/user")
 	@ResponseBody
 	public Object user() {
@@ -42,6 +42,7 @@ public class InfoController {
 	 * Retorna as Informações das Entidades do Sistema
 	 * @return Lista com Informações de Todas as Entidades do Sistema
 	 */
+	@CrossOrigin
 	@RequestMapping("/entity/list")
 	@ResponseBody
 	public ResponseEntity<Object[]> entityList() {

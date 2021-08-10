@@ -19,7 +19,6 @@ import br.campos.restaurantes.util.BadRequestException;
  *
  * @author Caio
  */
-@CrossOrigin(origins = "*")
 @RestController("crudController")
 public class CRUDController {
 
@@ -36,6 +35,7 @@ public class CRUDController {
 	 * @return Registro encontrado no banco
 	 * @throws br.campos.restaurantes.util.BadRequestException
 	 */
+	@CrossOrigin
 	@RequestMapping("/findone")
 	public @ResponseBody
 	ResponseEntity<Object> findOne(@RequestBody CRUDRequest req) throws BadRequestException {
@@ -49,6 +49,7 @@ public class CRUDController {
 	 * @return Registros encontrados no banco
 	 * @throws br.campos.restaurantes.util.BadRequestException
 	 */
+	@CrossOrigin
 	@RequestMapping("/findall")
 	public @ResponseBody
 	ResponseEntity<Object[]> findAll(@RequestBody CRUDRequest req) throws BadRequestException {
@@ -62,6 +63,7 @@ public class CRUDController {
 	 * @return Registros encontrados no banco
 	 * @throws br.campos.restaurantes.util.BadRequestException
 	 */
+	@CrossOrigin
 	@RequestMapping("/findspecial")
 	public @ResponseBody
 	ResponseEntity<Object[]> findByCriteria(@RequestBody CRUDRequest req) throws BadRequestException {
@@ -75,6 +77,7 @@ public class CRUDController {
 	 * @return Registros encontrados no banco
 	 * @throws br.campos.restaurantes.util.BadRequestException
 	 */
+	@CrossOrigin
 	@RequestMapping("/findnome")
 	public @ResponseBody
 	ResponseEntity<Object[]> findByNome(@RequestBody CRUDRequest req) throws BadRequestException {
@@ -89,6 +92,7 @@ public class CRUDController {
 	 * @return Id do elemento persistido
 	 * @throws br.campos.restaurantes.util.BadRequestException
 	 */
+	@CrossOrigin
 	@RequestMapping("/save")
 	public @ResponseBody
 	ResponseEntity<Object> save(@RequestBody CRUDRequest req) throws BadRequestException {
@@ -102,6 +106,7 @@ public class CRUDController {
 	 * @return Id do elemento apagado
 	 * @throws br.campos.restaurantes.util.BadRequestException
 	 */
+	@CrossOrigin
 	@RequestMapping("/delete")
 	public @ResponseBody
 	ResponseEntity<Object> delete(@RequestBody CRUDRequest req) throws BadRequestException {
