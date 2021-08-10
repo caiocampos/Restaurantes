@@ -16,8 +16,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import br.campos.restaurantes.helper.SecurityHelper;
 import br.campos.restaurantes.service.LoginService;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
 /**
  * Componente que configura a segurança de acesso do projeto
  *
@@ -56,7 +54,7 @@ public class LoginSecurityConfigurer extends WebSecurityConfigurerAdapter {
 	CorsConfigurationSource corsConfigurationSource() {
 		final CorsConfiguration configuration = new CorsConfiguration();
 		configuration.setAllowedOrigins(Arrays.asList("*"));
-		configuration.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS", "DELETE", "PUT", "PATCH"));
+		configuration.setAllowedMethods(Arrays.asList("*"));
 		configuration.setAllowedHeaders(Arrays.asList("X-Requested-With", "Origin", "Content-Type", "Accept", "Authorization", "Cache-Control", "Content-Type"));
 		configuration.setAllowCredentials(true);
 		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -72,8 +70,7 @@ public class LoginSecurityConfigurer extends WebSecurityConfigurerAdapter {
 	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.cors(withDefaults());
-		http.csrf()
+		http.csrf().disable().cors()
 				.and()
 				.authorizeRequests()
 				.antMatchers("/login", "/entity/list").permitAll()
