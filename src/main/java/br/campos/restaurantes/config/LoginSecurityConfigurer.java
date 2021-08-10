@@ -48,21 +48,6 @@ public class LoginSecurityConfigurer extends WebSecurityConfigurerAdapter {
 	}
 
 	/**
-	 * Bean de configuração do Cors
-	 */
-	@Bean
-	CorsConfigurationSource corsConfigurationSource() {
-		final CorsConfiguration configuration = new CorsConfiguration();
-		configuration.setAllowedOrigins(Arrays.asList("*"));
-		configuration.setAllowedMethods(Arrays.asList("*"));
-		configuration.setAllowedHeaders(Arrays.asList("X-Requested-With", "Origin", "Content-Type", "Accept", "Authorization", "Cache-Control", "Content-Type"));
-		configuration.setAllowCredentials(true);
-		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", configuration);
-		return source;
-	}
-
-	/**
 	 * Cofigura os acessos possíveis ao sistema, permite acesso ao login, ao
 	 * logout e ao "/public", demeais requisições somente se autenticado
 	 *
