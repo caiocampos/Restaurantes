@@ -1,4 +1,4 @@
-package com.zetcode.config;
+package br.campos.restaurantes.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -10,8 +10,9 @@ public class WebConfigurer implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-			.allowedMethods("OPTIONS", "GET", "PUT", "POST", "DELETE")
-			.allowedOrigins("*")
-			.allowedHeaders("*");
+            .allowedOrigins("*")
+			.allowedMethods("OPTIONS", "GET", "POST", "PUT", "PATCH", "DELETE")
+			.allowedHeaders("Access-Control-Allow-Headers", "Access-Control-Allow-Origin", "Access-Control-Request-Method",
+                "Access-Control-Request-Headers", "Origin", "Cache-Control", "Content-Type", "Authorization");
     }
 }
