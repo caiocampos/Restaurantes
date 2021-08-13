@@ -13,6 +13,7 @@ public class WebConfigurer implements WebMvcConfigurer {
             .allowedOrigins("*")
 			.allowedMethods("OPTIONS", "GET", "POST", "PUT", "PATCH", "DELETE")
 			.allowedHeaders("Access-Control-Allow-Headers", "Access-Control-Allow-Origin", "Access-Control-Request-Method",
-                "Access-Control-Request-Headers", "Origin", "Cache-Control", "Content-Type", "Authorization");
+                "Access-Control-Request-Headers", "Origin", "Cache-Control", "Content-Type", "Authorization")
+            .allowCredentials(true);
     }
 }
