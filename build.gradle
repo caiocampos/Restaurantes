@@ -22,7 +22,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb:2.5.5'
     implementation 'org.springframework.data:spring-data-mongodb:3.2.6'
     implementation 'org.springframework.boot:spring-boot:2.5.5'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.5'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.6'
 }
 
 group = 'br.campos'
