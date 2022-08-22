@@ -21,7 +21,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web:2.7.3'
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb:2.7.3'
     implementation 'org.springframework.data:spring-data-mongodb:3.4.2'
-    implementation 'org.springframework.boot:spring-boot:2.7.2'
+    implementation 'org.springframework.boot:spring-boot:2.7.3'
     testImplementation 'org.springframework.boot:spring-boot-starter-test:2.7.3'
 }
 
