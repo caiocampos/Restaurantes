@@ -16,13 +16,13 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter:3.0.3'
-    implementation 'org.springframework.boot:spring-boot-starter-security:3.0.3'
-    implementation 'org.springframework.boot:spring-boot-starter-web:3.0.3'
+    implementation 'org.springframework.boot:spring-boot-starter:3.0.4'
+    implementation 'org.springframework.boot:spring-boot-starter-security:3.0.4'
+    implementation 'org.springframework.boot:spring-boot-starter-web:3.0.4'
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb:3.0.4'
     implementation 'org.springframework.data:spring-data-mongodb:4.0.4'
     implementation 'org.springframework.boot:spring-boot:3.0.3'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test:3.0.3'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:3.0.4'
 }
 
 group = 'br.campos'
