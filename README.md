@@ -1,5 +1,6 @@
 # Restaurantes (Restaurante's)
 
+[![Go CI](https://github.com/caiocampos/Restaurantes/actions/workflows/go.yml/badge.svg)](https://github.com/caiocampos/Restaurantes/actions/workflows/go.yml)
 [![License](https://img.shields.io/github/license/caiocampos/Restaurantes.svg)](LICENSE)
 
 Software com login, gestão de autoridades e CRUD de entidades, usando Go, Gin Gonic e MongoDB
