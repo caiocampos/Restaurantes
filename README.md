@@ -4,9 +4,7 @@
 
 Software com login, gestão de autoridades e CRUD de entidades, usando Go, Gin Gonic e MongoDB
 
-<!--
 ## [Projeto Front-end](https://github.com/caiocampos/restaurantes-app)
--->
 
 ## Executando:
 
